@@ -3,13 +3,13 @@ package com.example.testorder.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.sql.Date;
+
 
 @Entity
-@Table(name =  "order")
+@Table(name =  "orders")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,6 +29,5 @@ public class Order {
     private int totalPrice;
 
     @Column(name = "datetime")
-    @Temporal(TemporalType.DATE)
     private Date dateTime;
 }

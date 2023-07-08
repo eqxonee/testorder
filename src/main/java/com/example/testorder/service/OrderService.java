@@ -24,4 +24,10 @@ public class OrderService {
                 .map(order, OrderResponseDto.class))
                 .collect(Collectors.toList());
     }
+
+//    public List<OrderResponseDto> getAll(){
+//        return ordersRepository.findAll();
+//    }
+
+
 }
