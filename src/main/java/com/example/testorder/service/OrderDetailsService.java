@@ -1,6 +1,5 @@
 package com.example.testorder.service;
 
-import com.example.testorder.dtos.OrderDetailsResponseDto;
 import com.example.testorder.models.OrderDetails;
 import com.example.testorder.repositories.OrdersDetailsRepository;
 import lombok.AllArgsConstructor;
@@ -18,11 +17,11 @@ public class OrderDetailsService {
     private OrdersDetailsRepository ordersDetailsRepository;
 
 
-    public List<OrderDetailsResponseDto> getAll(){
+    public List<OrderDetails> getAll(){
         List<OrderDetails> ordersDetails = ordersDetailsRepository.findAll();
 
         return ordersDetails.stream().map(order -> modelMapper
-                        .map(order, OrderDetailsResponseDto.class))
+                        .map(order, OrderDetails.class))
                         .collect(Collectors.toList());
     }
 

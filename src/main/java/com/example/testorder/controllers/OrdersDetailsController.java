@@ -1,6 +1,6 @@
 package com.example.testorder.controllers;
 
-import com.example.testorder.dtos.OrderDetailsResponseDto;
+import com.example.testorder.models.OrderDetails;
 import com.example.testorder.service.OrderDetailsService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class OrdersDetailsController {
     private OrderDetailsService orderDetailsService;
 
     @GetMapping("get-all")
-    public List<OrderDetailsResponseDto> getAll() {
+    public List<OrderDetails> getAll() {
         return orderDetailsService.getAll();
     }
 
