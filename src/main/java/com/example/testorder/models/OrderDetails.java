@@ -21,9 +21,8 @@ public class OrderDetails {
     @Column(name = "product_name")
     private String productName;
 
-    @ManyToOne
-    @JoinColumn (name = "order_id")
-    private Order orderId;
+    @Column (name = "order_id")
+    private int orderId;
 
     @Column(name = "quantity")
     private int quantity;

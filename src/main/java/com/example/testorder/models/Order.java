@@ -1,11 +1,13 @@
 package com.example.testorder.models;
 
 
+import com.example.testorder.dtos.OrderDetailsAntiRecDto;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -30,4 +32,6 @@ public class Order {
 
     @Column(name = "datetime")
     private Date dateTime;
+
+
 }
