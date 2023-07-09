@@ -25,9 +25,7 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
-//    public List<OrderResponseDto> getAll(){
-//        return ordersRepository.findAll();
-//    }
+
 
 
 }

@@ -24,7 +24,13 @@ public class OrderDetailsService {
         List<OrderDetails> ordersDetails = ordersDetailsRepository.findAll();
 
         return ordersDetails.stream().map(order -> modelMapper
-                        .map(ordersDetails, OrderDetailsResponseDto.class))
+                        .map(order, OrderDetailsResponseDto.class))
                         .collect(Collectors.toList());
     }
+
+    public List<OrderDetails> getByOrderId(int orderId){
+        List<OrderDetails> ordersDetails = ordersDetailsRepository.findAllByOrderId(orderId);
+        return ordersDetails;
+    }
+
 }
