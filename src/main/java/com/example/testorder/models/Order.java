@@ -1,12 +1,10 @@
 package com.example.testorder.models;
 
 
-import com.example.testorder.dtos.OrderDetailsAntiRecDto;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,6 +30,10 @@ public class Order {
 
     @Column(name = "datetime")
     private Date dateTime;
+
+    @OneToMany(targetEntity = OrderDetails.class,cascade = CascadeType.ALL)
+    @JoinColumn(name ="order_id",referencedColumnName = "id")
+    private List<OrderDetails> orderDetails;
 
 
 }

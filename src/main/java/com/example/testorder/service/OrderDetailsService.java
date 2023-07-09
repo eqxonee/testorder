@@ -1,8 +1,6 @@
 package com.example.testorder.service;
 
 import com.example.testorder.dtos.OrderDetailsResponseDto;
-import com.example.testorder.dtos.OrderResponseDto;
-import com.example.testorder.models.Order;
 import com.example.testorder.models.OrderDetails;
 import com.example.testorder.repositories.OrdersDetailsRepository;
 import lombok.AllArgsConstructor;
@@ -28,9 +26,9 @@ public class OrderDetailsService {
                         .collect(Collectors.toList());
     }
 
-    public List<OrderDetails> getByOrderId(int orderId){
-        List<OrderDetails> ordersDetails = ordersDetailsRepository.findAllByOrderId(orderId);
-        return ordersDetails;
-    }
+//    public List<OrderDetails> getByOrderId(int orderId){
+//        List<OrderDetails> ordersDetails = ordersDetailsRepository.findAllByOrderId(orderId);
+//        return ordersDetails;
+//    }
 
 }

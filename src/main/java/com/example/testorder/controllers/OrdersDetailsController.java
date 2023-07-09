@@ -1,11 +1,9 @@
 package com.example.testorder.controllers;
 
 import com.example.testorder.dtos.OrderDetailsResponseDto;
-import com.example.testorder.models.OrderDetails;
 import com.example.testorder.service.OrderDetailsService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,9 +20,10 @@ public class OrdersDetailsController {
     public List<OrderDetailsResponseDto> getAll() {
         return orderDetailsService.getAll();
     }
-    @GetMapping("get-by-id/{orderId}")
-    public List<OrderDetails> getByOrderId(@PathVariable int orderId){
-        return orderDetailsService.getByOrderId(orderId);
 
-    }
+//    @GetMapping("get-by-id/{orderId}")
+//    public List<OrderDetails> getByOrderId(@PathVariable int orderId){
+//        return orderDetailsService.getByOrderId(orderId);
+//
+//    }
 }
