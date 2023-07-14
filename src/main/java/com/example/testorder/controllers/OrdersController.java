@@ -35,9 +35,9 @@ public class OrdersController {
         orderService.addNewOrder(orderRequestDto);
     }
 
-    @PutMapping(value = "/updateById/{id}")
-    public void updateById(@PathVariable int id, @RequestBody Order order) {
-        orderService.updateById(id, order);
+    @PutMapping(value = "updateById")
+    public void updateById(@RequestBody OrderRequestDto orderRequestDto) {
+        orderService.updateById(orderRequestDto);
     }
 
 //    @GetMapping("get-all-with-date")

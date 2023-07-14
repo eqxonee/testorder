@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,33 +21,48 @@ public class OrderService {
     private OrdersRepository ordersRepository;
     private RestTemplate restTemplate;
 
-    public List<Order> getAll(){
+    public List<Order> getAll() {
         List<Order> orders = ordersRepository.findAll();
 
         return orders.stream().map(order -> modelMapper
-                .map(order, Order.class))
+                        .map(order, Order.class))
                 .collect(Collectors.toList());
     }
 
-    public void addNewOrder(OrderRequestDto orderRequestDto){
-        Order order = modelMapper.map(orderRequestDto,Order.class);
+    public void addNewOrder(OrderRequestDto orderRequestDto) {
+        Order order = modelMapper.map(orderRequestDto, Order.class);
 
         order.setDateTime(restTemplate.getForObject("http://localhost:8040/date/get", Date.class));
         ordersRepository.save(order);
     }
 
-    public void updateById(int id, Order order) {
-        Order findOrder = ordersRepository.findById(id).get();
+    public void updateById(OrderRequestDto orderRequestDto) {
+        if (orderRequestDto.getId() == null) {
+            throw new RuntimeException("ID заказа не может быть пустым");
+        }
 
-        findOrder.setCustomerName(order.getCustomerName());
-        findOrder.setCustomerAddress(order.getCustomerAddress());
-        findOrder.setTotalPrice(order.getTotalPrice());
+        Optional<Order> findOrder = ordersRepository.findById(orderRequestDto.getId());
+        if (findOrder.isEmpty()) {
+            throw new RuntimeException("Заказа с указанным ID не существет -" + orderRequestDto.getId());
+        }
+//        Order order = modelMapper.map(orderRequestDto,Order.class);
+//        order.setId(orderRequestDto.getId());
 
-        ordersRepository.save(findOrder);
+        findOrder.map(m -> {
+            m.setCustomerName(orderRequestDto.getCustomerName());
+            m.setCustomerAddress(orderRequestDto.getCustomerAddress());
+            m.setTotalPrice(orderRequestDto.getTotalPrice());
+
+
+            return m;
+        });
+
+//        findOrder.setCustomerName(order.getCustomerName());
+//        findOrder.setCustomerAddress(order.getCustomerAddress());
+//        findOrder.setTotalPrice(order.getTotalPrice());
+
+        ordersRepository.save(findOrder.get());
     }
-
-
-
 
 
 }
