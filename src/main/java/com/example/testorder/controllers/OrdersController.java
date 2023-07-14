@@ -1,5 +1,6 @@
 package com.example.testorder.controllers;
 
+import com.example.testorder.dtos.OrderRequestDto;
 import com.example.testorder.models.Order;
 import com.example.testorder.models.OrderDetails;
 import com.example.testorder.repositories.OrdersRepository;
@@ -30,8 +31,13 @@ public class OrdersController {
     }
 
     @PostMapping(value = "add-new")
-    public void addNew(@RequestBody Order order) {
-        orderService.addNewOrder(order);
+    public void addNew(@RequestBody OrderRequestDto orderRequestDto) {
+        orderService.addNewOrder(orderRequestDto);
+    }
+
+    @PutMapping(value = "/updateById/{id}")
+    public void updateById(@PathVariable int id, @RequestBody Order order) {
+        orderService.updateById(id, order);
     }
 
 //    @GetMapping("get-all-with-date")

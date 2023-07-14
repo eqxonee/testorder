@@ -1,5 +1,6 @@
 package com.example.testorder.service;
 
+import com.example.testorder.dtos.OrderRequestDto;
 import com.example.testorder.models.Order;
 import com.example.testorder.models.OrderDetails;
 import com.example.testorder.repositories.OrdersRepository;
@@ -27,11 +28,22 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
-    public void addNewOrder(Order order){
+    public void addNewOrder(OrderRequestDto orderRequestDto){
+        Order order = modelMapper.map(orderRequestDto,Order.class);
+
         order.setDateTime(restTemplate.getForObject("http://localhost:8040/date/get", Date.class));
         ordersRepository.save(order);
     }
 
+    public void updateById(int id, Order order) {
+        Order findOrder = ordersRepository.findById(id).get();
+
+        findOrder.setCustomerName(order.getCustomerName());
+        findOrder.setCustomerAddress(order.getCustomerAddress());
+        findOrder.setTotalPrice(order.getTotalPrice());
+
+        ordersRepository.save(findOrder);
+    }
 
 
 
