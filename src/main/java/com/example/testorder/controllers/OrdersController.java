@@ -1,18 +1,17 @@
 package com.example.testorder.controllers;
 
-import com.example.testorder.dtos.OrderRequestDto;
 import com.example.testorder.models.Order;
 import com.example.testorder.models.OrderDetails;
-import com.example.testorder.repositories.OrdersDetailsRepository;
 import com.example.testorder.repositories.OrdersRepository;
+import com.example.testorder.service.OrderDetailsService;
 import com.example.testorder.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import java.sql.Date;
+
+
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("orders")
@@ -34,7 +33,6 @@ public class OrdersController {
     public void addNew(@RequestBody Order order) {
         orderService.addNewOrder(order);
     }
-
 
 //    @GetMapping("get-all-with-date")
 //    public List<Order>getAllWithDate() {
