@@ -2,7 +2,6 @@ package com.example.testorder.service;
 
 import com.example.testorder.dtos.OrderRequestDto;
 import com.example.testorder.models.Order;
-import com.example.testorder.models.OrderDetails;
 import com.example.testorder.repositories.OrdersRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -29,10 +28,15 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
+    public Date dateService(){
+        Date newDate = restTemplate.getForObject("http://localhost:8040/date/get", Date.class);
+        return newDate;
+    }
+
     public void addNewOrder(OrderRequestDto orderRequestDto) {
         Order order = modelMapper.map(orderRequestDto, Order.class);
 
-        order.setDateTime(restTemplate.getForObject("http://localhost:8040/date/get", Date.class));
+        order.setDateTime(dateService());
         ordersRepository.save(order);
     }
 
@@ -45,23 +49,20 @@ public class OrderService {
         if (findOrder.isEmpty()) {
             throw new RuntimeException("Заказа с указанным ID не существет -" + orderRequestDto.getId());
         }
-//        Order order = modelMapper.map(orderRequestDto,Order.class);
-//        order.setId(orderRequestDto.getId());
 
         findOrder.map(m -> {
             m.setCustomerName(orderRequestDto.getCustomerName());
             m.setCustomerAddress(orderRequestDto.getCustomerAddress());
             m.setTotalPrice(orderRequestDto.getTotalPrice());
 
-
             return m;
         });
 
-//        findOrder.setCustomerName(order.getCustomerName());
-//        findOrder.setCustomerAddress(order.getCustomerAddress());
-//        findOrder.setTotalPrice(order.getTotalPrice());
-
         ordersRepository.save(findOrder.get());
+    }
+
+    public void deleteById(Long id) {
+        ordersRepository.deleteById(id);
     }
 
 
