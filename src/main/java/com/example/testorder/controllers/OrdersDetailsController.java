@@ -1,5 +1,6 @@
 package com.example.testorder.controllers;
 
+import com.example.testorder.dtos.OrderDetailsRequestDto;
 import com.example.testorder.models.OrderDetails;
 import com.example.testorder.service.OrderDetailsService;
 import lombok.AllArgsConstructor;
@@ -21,13 +22,13 @@ public class OrdersDetailsController {
     }
 
     @PostMapping(value = "add-new-order-details")
-    public void addNew(@RequestBody OrderDetails orderDetails) {
-        orderDetailsService.addNewOrderDetails(orderDetails);
+    public void addNew(@RequestBody OrderDetailsRequestDto orderDetailsRequestDto) {
+        orderDetailsService.addNewOrderDetails(orderDetailsRequestDto);
     }
 
-//    @GetMapping("get-by-id/{orderId}")
-//    public List<OrderDetails> getByOrderId(@PathVariable int orderId){
-//        return orderDetailsService.getByOrderId(orderId);
-//
-//    }
+    @DeleteMapping(value = "/deleteById/{id}")
+    public void deleteById(@PathVariable int id) {
+        orderDetailsService.deleteById(id);
+    }
+
 }
