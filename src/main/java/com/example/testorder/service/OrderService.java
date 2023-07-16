@@ -20,11 +20,19 @@ public class OrderService {
     private OrdersRepository ordersRepository;
     private RestTemplate restTemplate;
 
-    public List<Order> getAll() {
+//    public List<Order> getAll() {
+//        List<Order> orders = ordersRepository.findAll();
+//
+//        return orders.stream().map(order -> modelMapper
+//                        .map(order, Order.class))
+//                .collect(Collectors.toList());
+//    }
+
+    public List<OrderRequestDto> getAll() {
         List<Order> orders = ordersRepository.findAll();
 
         return orders.stream().map(order -> modelMapper
-                        .map(order, Order.class))
+                        .map(order, OrderRequestDto.class))
                 .collect(Collectors.toList());
     }
 

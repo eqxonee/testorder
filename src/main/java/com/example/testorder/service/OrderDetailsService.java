@@ -18,11 +18,19 @@ public class OrderDetailsService {
     private OrdersDetailsRepository ordersDetailsRepository;
 
 
-    public List<OrderDetails> getAll(){
+//    public List<OrderDetails> getAll(){
+//        List<OrderDetails> ordersDetails = ordersDetailsRepository.findAll();
+//
+//        return ordersDetails.stream().map(order -> modelMapper
+//                        .map(order, OrderDetails.class))
+//                        .collect(Collectors.toList());
+//    }
+
+        public List<OrderDetailsRequestDto> getAll(){
         List<OrderDetails> ordersDetails = ordersDetailsRepository.findAll();
 
-        return ordersDetails.stream().map(order -> modelMapper
-                        .map(order, OrderDetails.class))
+        return ordersDetails.stream().map(orderDetails -> modelMapper
+                        .map(orderDetails, OrderDetailsRequestDto.class))
                         .collect(Collectors.toList());
     }
 

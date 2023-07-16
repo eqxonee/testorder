@@ -1,7 +1,6 @@
 package com.example.testorder.controllers;
 
 import com.example.testorder.dtos.OrderRequestDto;
-import com.example.testorder.models.Order;
 import com.example.testorder.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ public class OrdersController {
     private OrderService orderService;
 
     @GetMapping("get-all")
-    public List<Order>getAll() {
+    public List<OrderRequestDto>getAll() {
         return orderService.getAll();
     }
 
