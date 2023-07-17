@@ -13,9 +13,11 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderRequestDto {
+public class OrderGetAllDto {
     private Long id;
     private String customerName;
     private String customerAddress;
     private int totalPrice;
+    private Date dateTime;
+    private List<OrderDetails> orderDetails;
 }

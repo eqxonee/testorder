@@ -1,5 +1,6 @@
 package com.example.testorder.controllers;
 
+import com.example.testorder.dtos.OrderGetAllDto;
 import com.example.testorder.dtos.OrderRequestDto;
 import com.example.testorder.service.OrderService;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ public class OrdersController {
     private OrderService orderService;
 
     @GetMapping("get-all")
-    public List<OrderRequestDto>getAll() {
+    public List<OrderGetAllDto>getAll() {
         return orderService.getAll();
     }
 

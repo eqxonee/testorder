@@ -1,5 +1,6 @@
 package com.example.testorder.service;
 
+import com.example.testorder.dtos.OrderGetAllDto;
 import com.example.testorder.dtos.OrderRequestDto;
 import com.example.testorder.models.Order;
 import com.example.testorder.repositories.OrdersRepository;
@@ -28,11 +29,11 @@ public class OrderService {
 //                .collect(Collectors.toList());
 //    }
 
-    public List<OrderRequestDto> getAll() {
+    public List<OrderGetAllDto> getAll() {
         List<Order> orders = ordersRepository.findAll();
 
         return orders.stream().map(order -> modelMapper
-                        .map(order, OrderRequestDto.class))
+                        .map(order, OrderGetAllDto.class))
                 .collect(Collectors.toList());
     }
 
